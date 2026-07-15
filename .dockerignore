@@ -1,0 +1,17 @@
+.git
+node_modules
+.next
+.vercel
+storybook-static
+coverage
+dist
+*.log
+.vscode
+Dockerfile*
+docker-compose*
+# + extras úteis
+.gitignore
+README.md
+**/*.stories.*
+cypress
+tmp
