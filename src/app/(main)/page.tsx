@@ -1,5 +1,7 @@
-import { HomePage } from './_components/homePage/HomePage';
+import { loadNftsList } from '@/services';
+import { HomePage } from './_components';
 
-export default function Home() {
-  return <HomePage />;
+export default async function Home() {
+  const { nfts, count } = await loadNftsList();
+  return <HomePage nfts={nfts} count={count} />;
 }

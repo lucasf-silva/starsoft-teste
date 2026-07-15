@@ -1,1 +1,2 @@
-export type { Nft } from './nft';
+export type { Nft, NftsListResponse } from './models';
+export { PatchAPI } from './patchAPI';
