@@ -1,0 +1,49 @@
+.buttonLeft {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.buttonRight {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.buttonLeft,
+.buttonRight,
+.input {
+  cursor: pointer;
+  border: none;
+  height: 44px;
+  padding: 0 12px;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.input {
+  text-align: center;
+  width: 56px;
+  max-width: 56px;
+  cursor: text;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
+@media (width >= 1024px) {
+  .buttonLeft,
+  .buttonRight,
+  .input {
+    height: 48px;
+  }
+}

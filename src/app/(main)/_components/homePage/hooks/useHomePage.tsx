@@ -9,7 +9,7 @@ import {
   loadNftsList,
   ROWS_PER_PAGE,
 } from '@/services';
-import type { SortField, SortOrder } from '@/services';
+import type { SortField, SortOrder } from '@/types';
 import { useMemo, useState } from 'react';
 
 type useHomePageResponse = {

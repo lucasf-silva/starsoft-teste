@@ -1,6 +1,7 @@
 'use server';
 
 import { Nft, NftsListResponse, PatchAPI } from '@/types';
+import type { LoadNftsListParams } from '@/types';
 import { api } from '@/utils';
 
 type getNftsListResponse = {
@@ -8,9 +9,13 @@ type getNftsListResponse = {
   count: number;
 };
 
-export const getNftsList = async (): Promise<NftsListResponse | undefined> => {
+export const getNftsList = async (
+  params?: LoadNftsListParams,
+): Promise<NftsListResponse | undefined> => {
   try {
-    const baseApi = await api.get<getNftsListResponse>(PatchAPI.NFTS_LIST);
+    const baseApi = await api.get<getNftsListResponse>(PatchAPI.NFTS_LIST, {
+      params,
+    });
 
     return baseApi;
   } catch (error) {

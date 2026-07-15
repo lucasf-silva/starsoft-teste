@@ -5,4 +5,3 @@ export {
   loadNftsList,
   ROWS_PER_PAGE,
 } from './allNftsService';
-export type { NftList, SortField, SortOrder } from './allNftsService';

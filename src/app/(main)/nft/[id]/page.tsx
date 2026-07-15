@@ -1,9 +1,20 @@
-import { Container } from '@/components';
+import { loadNftDetailById } from '@/services/nftDetailService';
+import { notFound } from 'next/navigation';
+import { NftDetailPage } from './_components';
 
-export default function NftDetail() {
-  return (
-    <Container>
-      <div>NftDetail</div>
-    </Container>
-  );
+type NftDetailPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+export default async function NftDetail({ params }: NftDetailPageProps) {
+  const { id } = await params;
+  const nft = await loadNftDetailById(id);
+
+  if (!nft) {
+    notFound();
+  }
+
+  return <NftDetailPage nft={nft} />;
 }

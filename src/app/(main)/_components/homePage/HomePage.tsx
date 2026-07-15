@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Container, NftsCard } from '@/components';
-import type { SortField, SortOrder } from '@/services';
+import type { SortField, SortOrder } from '@/types';
 import styles from './HomePage.module.scss';
 import { useHomePage } from './hooks/useHomePage';
 

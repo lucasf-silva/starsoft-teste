@@ -1,20 +1,6 @@
-import { Nft, NftsListResponse, PatchAPI, nftsListResponse } from '@/types';
-import { api } from '@/utils';
-
-export type NftList = {
-  nfts: Nft[];
-  count: number;
-};
-
-export type SortField = 'id' | 'name' | 'price';
-export type SortOrder = 'ASC' | 'DESC';
-
-export type LoadNftsListParams = {
-  page?: number;
-  rows?: number;
-  sortBy?: SortField;
-  orderBy?: SortOrder;
-};
+import { getNftsList } from '@/actions';
+import { nftsListResponse } from '@/types';
+import type { LoadNftsListParams, NftList, SortField, SortOrder } from '@/types';
 
 export const ROWS_PER_PAGE = 8;
 export const DEFAULT_SORT_BY: SortField = 'id';
@@ -35,12 +21,7 @@ export async function loadNftsList(params: LoadNftsListParams = {}): Promise<Nft
   };
 
   try {
-    const response = await api.get<NftsListResponse, Required<LoadNftsListParams>>(
-      PatchAPI.NFTS_LIST,
-      {
-        params: resolvedParams,
-      },
-    );
+    const response = await getNftsList(resolvedParams);
 
     const parsed = nftsListResponse.safeParse(response);
 
