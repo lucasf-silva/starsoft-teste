@@ -4,6 +4,7 @@ import Image from 'next/image';
 import cryptoIcon from '@/assets/cripto-icon.svg';
 import { formatPrice } from '@/utils';
 import { Nft } from '@/types';
+import Link from 'next/link';
 
 type NftsCardProps = {
   nft: Nft;
@@ -50,6 +51,12 @@ export function NftsCard({ nft }: NftsCardProps) {
             className={styles.priceIcon}
           />
           <p className={styles.price}>{formatPrice(nft.price)} ETH</p>
+        </div>
+
+        <div className={styles.actions}>
+          <Link href={`/nft/${nft.id}`} className={styles.button}>
+            Ver detalhes
+          </Link>
         </div>
       </div>
     </motion.li>
