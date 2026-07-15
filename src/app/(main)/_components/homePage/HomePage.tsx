@@ -105,39 +105,34 @@ export function HomePage() {
 
         {count > 0 ? (
           <div className={styles.loadMoreSection}>
-            {hasMore ? (
-              <>
-                <div
-                  className={styles.progressBar}
-                  role="progressbar"
-                  aria-label="Progresso de carregamento dos produtos"
-                  aria-valuemin={0}
-                  aria-valuemax={count}
-                  aria-valuenow={loadedItems}
-                >
-                  <div
-                    className={styles.progressFill}
-                    style={{ width: `${progressPercentage}%` }}
-                  />
-                </div>
+            <>
+              <div
+                className={styles.progressBar}
+                role="progressbar"
+                aria-label="Progresso de carregamento dos produtos"
+                aria-valuemin={0}
+                aria-valuemax={count}
+                aria-valuenow={loadedItems}
+              >
+                <div className={styles.progressFill} style={{ width: `${progressPercentage}%` }} />
+              </div>
 
-                <div className={styles.loadMoreButtonContainer}>
-                  <motion.button
-                    type="button"
-                    onClick={() => {
-                      void setPageSearch();
-                    }}
-                    className={styles.loadMoreButton}
-                    disabled={isLoadingMore}
-                    whileHover={isLoadingMore ? undefined : { y: -1, scale: 1.01 }}
-                    whileTap={isLoadingMore ? undefined : { scale: 0.99 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
-                  >
-                    {isLoadingMore ? 'Carregando...' : 'Carregar mais'}
-                  </motion.button>
-                </div>
-              </>
-            ) : null}
+              <div className={styles.loadMoreButtonContainer}>
+                <motion.button
+                  type="button"
+                  onClick={() => {
+                    void setPageSearch();
+                  }}
+                  className={styles.loadMoreButton}
+                  disabled={isLoadingMore || !hasMore}
+                  whileHover={isLoadingMore ? undefined : { y: -1, scale: 1.01 }}
+                  whileTap={isLoadingMore ? undefined : { scale: 0.99 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                >
+                  {isLoadingMore ? 'Carregando...' : hasMore ? 'Carregar mais' : 'Você já viu tudo'}
+                </motion.button>
+              </div>
+            </>
           </div>
         ) : null}
       </section>
