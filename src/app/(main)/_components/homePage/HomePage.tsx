@@ -133,7 +133,7 @@ export function HomePage() {
                     whileTap={isLoadingMore ? undefined : { scale: 0.99 }}
                     transition={{ duration: 0.2, ease: 'easeOut' }}
                   >
-                    {isLoadingMore ? 'Carregando mais...' : 'Carregar mais'}
+                    {isLoadingMore ? 'Carregando...' : 'Carregar mais'}
                   </motion.button>
                 </div>
               </>
