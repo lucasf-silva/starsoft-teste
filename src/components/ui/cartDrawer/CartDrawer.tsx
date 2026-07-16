@@ -1,0 +1,91 @@
+'use client';
+
+import Image from 'next/image';
+import { Trash2 } from 'lucide-react';
+import { Drawer } from '@/components';
+import { QuantitySelector } from '@/components';
+import { formatPrice } from '@/utils';
+import cryptoIcon from '@/assets/cripto-icon.svg';
+import styles from './CartDrawer.module.scss';
+import { useCartDrawer } from './hooks/useCartDrawer';
+
+export function CartDrawer() {
+  const { isOpen, items, totalPrice, handleCloseCart, handleRemoveItem, handleUpdateQuantity } =
+    useCartDrawer();
+
+  return (
+    <Drawer
+      isOpen={isOpen}
+      title="Mochila de Compras"
+      onClose={handleCloseCart}
+      ariaLabel="Carrinho lateral"
+    >
+      {items.length === 0 ? (
+        <div className={styles.emptyState}>
+          <p className={styles.emptyTitle}>Seu carrinho está vazio</p>
+          <p className={styles.emptyDescription}>
+            Adicione um NFT para vê-lo aqui com a quantidade escolhida.
+          </p>
+        </div>
+      ) : (
+        <>
+          <ul className={styles.list}>
+            {items.map((item) => (
+              <li key={item.id} className={styles.item}>
+                <div className={styles.itemImageWrapper}>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={88}
+                    height={88}
+                    className={styles.itemImage}
+                  />
+                </div>
+
+                <div className={styles.itemContent}>
+                  <div className={styles.itemHeader}>
+                    <div>
+                      <h3 className={styles.itemTitle}>Item {item.id}</h3>
+                      <p className={styles.itemDescription}>{item.name}</p>
+                      <div className={styles.itemPriceRow}>
+                        <Image src={cryptoIcon} alt="Icone de criptomoeda" width={18} height={18} />
+                        <p className={styles.itemPrice}>{formatPrice(item.price)} ETH</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.itemFooter}>
+                    <QuantitySelector
+                      ariaLabel={`Quantidade do item ${item.name}`}
+                      defaultValue={item.quantity}
+                      min={1}
+                      onChange={(quantity) => handleUpdateQuantity(item.id, quantity)}
+                    />
+                    <button
+                      type="button"
+                      className={styles.removeButton}
+                      aria-label={`Remover ${item.name} do carrinho`}
+                      onClick={() => handleRemoveItem(item.id)}
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div className={styles.summary}>
+            <div className={styles.summaryRow}>
+              <span>Total</span>
+              <strong>{formatPrice(String(totalPrice))} ETH</strong>
+            </div>
+            <button type="button" className={styles.finishButton}>
+              Finalizar Compra
+            </button>
+          </div>
+        </>
+      )}
+    </Drawer>
+  );
+}
