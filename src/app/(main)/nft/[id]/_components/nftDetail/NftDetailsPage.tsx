@@ -13,7 +13,7 @@ type NftDetailPageProps = {
 };
 
 export function NftDetailPage({ nft }: NftDetailPageProps) {
-  const { quantity, setQuantity, handleAddToCart } = useNftDetailPage({ nft });
+  const { quantity, setQuantity, handleAddToCart, handleBuyNow } = useNftDetailPage({ nft });
 
   return (
     <Container>
@@ -47,6 +47,9 @@ export function NftDetailPage({ nft }: NftDetailPageProps) {
               <QuantitySelector defaultValue={quantity} onChange={setQuantity} />
               <button className={styles.buttonAction} type="button" onClick={handleAddToCart}>
                 Adicionar ao carrinho
+              </button>
+              <button className={styles.buyButton} type="button" onClick={handleBuyNow}>
+                Comprar
               </button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { addItem, openCart } from '@/store';
+import { addItem, openCart, setCartStep } from '@/store';
 import { makeStore } from '@/store/store';
 import { CartDrawer } from './CartDrawer';
 
@@ -19,6 +19,7 @@ describe('CartDrawer', () => {
     const store = makeStore({
       cart: {
         isOpen: true,
+        currentStep: 'items',
         items: [],
       },
     });
@@ -49,11 +50,41 @@ describe('CartDrawer', () => {
 
     expect(store.getState().cart.items[0].quantity).toBe(2);
     expect(screen.getByText('20.00 ETH')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Finalizar Compra' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Ver Resumo' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: `Remover ${nft.name} do carrinho` }));
 
     expect(store.getState().cart.items).toHaveLength(0);
     expect(screen.getByText('Seu carrinho está vazio')).toBeInTheDocument();
+  });
+
+  it('renderiza o resumo quando o drawer abre nesse step e finaliza a compra com sucesso', async () => {
+    const user = userEvent.setup();
+    const store = makeStore();
+
+    store.dispatch(addItem({ nft, quantity: 2 }));
+    store.dispatch(setCartStep('summary'));
+    store.dispatch(openCart());
+
+    render(
+      <Provider store={store}>
+        <CartDrawer />
+      </Provider>,
+    );
+
+    expect(screen.getByText('Resumo da Compra')).toBeInTheDocument();
+    expect(screen.getByText('Galaxy Blade')).toBeInTheDocument();
+    expect(screen.getByText('Qtd: 2')).toBeInTheDocument();
+    expect(screen.getByText('Preço unitário')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Finalizar Compra' }));
+
+    expect(screen.getByText('Compra finalizada com sucesso')).toBeInTheDocument();
+    expect(store.getState().cart.items).toHaveLength(0);
+
+    await user.click(screen.getByRole('button', { name: 'Compra Finalizada!' }));
+
+    expect(store.getState().cart.isOpen).toBe(false);
+    expect(store.getState().cart.currentStep).toBe('items');
   });
 });

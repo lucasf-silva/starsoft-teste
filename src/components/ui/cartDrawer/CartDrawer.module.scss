@@ -29,6 +29,29 @@
   font-weight: 600;
 }
 
+.successState {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  padding: 24px 8px;
+}
+
+.successTitle {
+  color: var(--color-text-primary);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.successDescription {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 .emptyDescription {
   color: var(--color-text-secondary);
   font-size: 14px;
@@ -130,6 +153,48 @@
   gap: 16px;
 }
 
+.summaryList {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 18px;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 12px;
+  border-radius: var(--border-radius);
+  background-color: var(--color-border);
+}
+
+.summaryItemHeader,
+.summaryItemRow,
+.summaryActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.summaryItemName {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.summaryItemQuantity,
+.summaryItemRow {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .summaryRow {
   display: flex;
   align-items: center;
@@ -147,7 +212,8 @@
   line-height: 1.5;
 }
 
-.finishButton {
+.finishButton,
+.secondaryButton {
   width: 100%;
   padding: 12px 8px;
   border: none;
@@ -159,6 +225,10 @@
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
+}
+
+.secondaryButton {
+  background-color: var(--color-border);
 }
 
 @media (width >= 640px) {

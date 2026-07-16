@@ -4,6 +4,7 @@ import {
   closeCart,
   openCart,
   removeItem,
+  setCartStep,
   toggleCart,
   updateQuantity,
 } from '../cartSlice';
@@ -27,6 +28,7 @@ describe('cartSlice', () => {
   it('soma a quantidade quando o item ja existe no carrinho', () => {
     const initialState = {
       isOpen: false,
+      currentStep: 'items' as const,
       items: [{ ...nft, quantity: 1 }],
     };
 
@@ -38,6 +40,7 @@ describe('cartSlice', () => {
   it('atualiza a quantidade respeitando o minimo de 1', () => {
     const initialState = {
       isOpen: false,
+      currentStep: 'items' as const,
       items: [{ ...nft, quantity: 4 }],
     };
 
@@ -49,13 +52,16 @@ describe('cartSlice', () => {
   it('remove item e controla abertura do drawer', () => {
     const withOpenCart = cartSlice.reducer(undefined, openCart());
     const withItem = cartSlice.reducer(withOpenCart, addItem({ nft, quantity: 1 }));
+    const withSummaryStep = cartSlice.reducer(withItem, setCartStep('summary'));
     const withoutItem = cartSlice.reducer(withItem, removeItem(nft.id));
-    const toggled = cartSlice.reducer(withoutItem, toggleCart());
+    const toggled = cartSlice.reducer(withSummaryStep, toggleCart());
     const closed = cartSlice.reducer(toggled, closeCart());
 
     expect(withOpenCart.isOpen).toBe(true);
+    expect(withSummaryStep.currentStep).toBe('summary');
     expect(withoutItem.items).toHaveLength(0);
     expect(toggled.isOpen).toBe(false);
     expect(closed.isOpen).toBe(false);
+    expect(closed.currentStep).toBe('items');
   });
 });

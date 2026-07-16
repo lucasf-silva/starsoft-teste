@@ -1,11 +1,15 @@
 'use client';
 
+import { useMemo } from 'react';
 import {
+  clearCart,
   closeCart,
   removeItem,
   selectCartItems,
+  selectCartStep,
   selectCartTotalPrice,
   selectIsCartOpen,
+  setCartStep,
   updateQuantity,
   useAppDispatch,
   useAppSelector,
@@ -15,7 +19,13 @@ type UseCartDrawerReturn = {
   isOpen: boolean;
   items: ReturnType<typeof selectCartItems>;
   totalPrice: number;
+  currentStep: ReturnType<typeof selectCartStep>;
+  title: string;
+  canGoBack: boolean;
   handleCloseCart: () => void;
+  handleBackStep: () => void;
+  handleNextStep: () => void;
+  handleFinishPurchase: () => void;
   handleRemoveItem: (id: number) => void;
   handleUpdateQuantity: (id: number, quantity: number) => void;
 };
@@ -25,9 +35,37 @@ export const useCartDrawer = (): UseCartDrawerReturn => {
   const isOpen = useAppSelector(selectIsCartOpen);
   const items = useAppSelector(selectCartItems);
   const totalPrice = useAppSelector(selectCartTotalPrice);
+  const currentStep = useAppSelector(selectCartStep);
+
+  const title = useMemo(() => {
+    if (currentStep === 'summary') {
+      return 'Resumo da Compra';
+    }
+
+    if (currentStep === 'success') {
+      return 'Compra Finalizada';
+    }
+
+    return 'Mochila de Compras';
+  }, [currentStep]);
+
+  const canGoBack = currentStep === 'summary';
 
   const handleCloseCart = () => {
     dispatch(closeCart());
+  };
+
+  const handleBackStep = () => {
+    dispatch(setCartStep('items'));
+  };
+
+  const handleNextStep = () => {
+    dispatch(setCartStep('summary'));
+  };
+
+  const handleFinishPurchase = () => {
+    dispatch(clearCart());
+    dispatch(setCartStep('success'));
   };
 
   const handleRemoveItem = (id: number) => {
@@ -42,7 +80,13 @@ export const useCartDrawer = (): UseCartDrawerReturn => {
     isOpen,
     items,
     totalPrice,
+    currentStep,
+    title,
+    canGoBack,
     handleCloseCart,
+    handleBackStep,
+    handleNextStep,
+    handleFinishPurchase,
     handleRemoveItem,
     handleUpdateQuantity,
   };

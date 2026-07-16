@@ -9,6 +9,7 @@ function parsePrice(price: string) {
 export const selectCart = (state: RootState) => state.cart;
 export const selectCartItems = (state: RootState) => state.cart.items;
 export const selectIsCartOpen = (state: RootState) => state.cart.isOpen;
+export const selectCartStep = (state: RootState) => state.cart.currentStep;
 export const selectCartItemsCount = (state: RootState) =>
   state.cart.items.reduce((total, item) => total + item.quantity, 0);
 export const selectCartTotalPrice = (state: RootState) =>

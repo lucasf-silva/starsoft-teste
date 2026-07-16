@@ -90,22 +90,30 @@
   width: 100%;
 }
 
-.buttonAction {
+.buttonAction,
+.buyButton {
   cursor: pointer;
   border: none;
   min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   min-width: 0;
   padding: 10px 12px;
   text-transform: uppercase;
   background-color: var(--color-primary);
   color: var(--color-text-primary);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.04em;
   border-radius: var(--border-radius);
   border: none;
+}
+
+.buyButton {
+  background-color: var(--color-border);
 }
 
 @media (width >= 640px) {
@@ -129,7 +137,8 @@
     font-size: 24px;
   }
 
-  .buttonAction {
+  .buttonAction,
+  .buyButton {
     font-size: 12px;
     padding-inline: 14px;
   }
@@ -159,7 +168,8 @@
     gap: 16px;
   }
 
-  .buttonAction {
+  .buttonAction,
+  .buyButton {
     min-width: 180px;
     font-size: 13px;
     padding-inline: 16px;
@@ -210,11 +220,9 @@
     width: auto;
   }
 
-  .buttonAction {
+  .buttonAction,
+  .buyButton {
     height: 48px;
-  }
-
-  .buttonAction {
     min-width: 220px;
     font-size: 14px;
     padding-inline: 20px;
