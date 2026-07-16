@@ -37,6 +37,34 @@
   padding: 16px;
 }
 
+.backButton {
+  display: flex;
+  padding: 8px 12px;
+  gap: 12px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backButton:hover {
+  color: var(--color-text-primary);
+  transform: translateX(-2px);
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .productName {
   color: var(--color-text-primary);
   font-size: 28px;
@@ -130,6 +158,10 @@
 
   .content {
     padding: 20px;
+  }
+
+  .backButton {
+    font-size: 15px;
   }
 
   .productName {
