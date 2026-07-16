@@ -2,11 +2,13 @@
 
 import { Container, ProgressiveImage, QuantitySelector } from '@/components';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './NftsDetailPage.module.scss';
 import cryptoIcon from '@/assets/cripto-icon.svg';
 import { formatPrice } from '@/utils';
 import { Nft } from '@/types';
 import { useNftDetailPage } from './hooks/useNftDetailPage';
+import { MoveLeft } from 'lucide-react';
 
 type NftDetailPageProps = {
   nft: Nft;
@@ -17,6 +19,9 @@ export function NftDetailPage({ nft }: NftDetailPageProps) {
 
   return (
     <Container>
+      <Link href="/" className={styles.backButton}>
+        <MoveLeft size={24} /> Voltar para a home
+      </Link>
       <div className={styles.card}>
         <div className={styles.imageWrapper}>
           <ProgressiveImage
