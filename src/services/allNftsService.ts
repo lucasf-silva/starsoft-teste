@@ -1,10 +1,7 @@
 import { getNftsList } from '@/actions';
+import { DEFAULT_ORDER_BY, DEFAULT_SORT_BY, ROWS_PER_PAGE } from '@/config';
 import { nftsListResponse } from '@/types';
-import type { LoadNftsListParams, NftList, SortField, SortOrder } from '@/types';
-
-export const ROWS_PER_PAGE = 8;
-export const DEFAULT_SORT_BY: SortField = 'id';
-export const DEFAULT_ORDER_BY: SortOrder = 'DESC';
+import type { LoadNftsListParams, NftList } from '@/types';
 
 export function getNextNftsPageParam(lastPage: NftList, allPages: NftList[]): number | undefined {
   const loadedItems = allPages.reduce((total, page) => total + page.nfts.length, 0);

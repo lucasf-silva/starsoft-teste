@@ -1,11 +1,6 @@
-import {
-  DEFAULT_ORDER_BY,
-  DEFAULT_SORT_BY,
-  getNextNftsPageParam,
-  loadNftsList,
-  ROWS_PER_PAGE,
-} from '../allNftsService';
+import { getNextNftsPageParam, loadNftsList } from '../allNftsService';
 import { getNftsList } from '@/actions';
+import { ROWS_PER_PAGE, DEFAULT_SORT_BY, DEFAULT_ORDER_BY } from '@/config';
 
 jest.mock('@/actions', () => ({
   getNftsList: jest.fn(),
