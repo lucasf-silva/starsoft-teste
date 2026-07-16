@@ -1,7 +1,7 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
 import styles from './QuantitySelector.module.scss';
+import { useQuantitySelector } from './hooks/useQuantitySelector';
 
 type QuantitySelectorProps = {
   min?: number;
@@ -11,10 +11,6 @@ type QuantitySelectorProps = {
   onChange?: (value: number) => void;
 };
 
-function clampValue(value: number, min: number, max: number): number {
-  return Math.min(Math.max(value, min), max);
-}
-
 export function QuantitySelector({
   min = 1,
   max = 100,
@@ -22,56 +18,50 @@ export function QuantitySelector({
   ariaLabel = 'Selecionar quantidade',
   onChange,
 }: QuantitySelectorProps) {
-  const [quantity, setQuantity] = useState(() => clampValue(defaultValue, min, max));
-
-  useEffect(() => {
-    setQuantity(clampValue(defaultValue, min, max));
-  }, [defaultValue, max, min]);
-
-  function updateQuantity(nextValue: number) {
-    const clampedValue = clampValue(nextValue, min, max);
-
-    setQuantity(clampedValue);
-    onChange?.(clampedValue);
-  }
-
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const nextValue = Number(event.target.value);
-
-    if (Number.isNaN(nextValue)) {
-      return;
-    }
-
-    updateQuantity(nextValue);
-  }
+  const { quantity, validationMessage, handleInputChange, decrementQuantity, incrementQuantity } =
+    useQuantitySelector({
+      min,
+      max,
+      defaultValue,
+      onChange,
+    });
 
   return (
-    <div className={styles.group} aria-label={ariaLabel}>
-      <button
-        type="button"
-        className={styles.buttonLeft}
-        onClick={() => updateQuantity(quantity - 1)}
-        aria-label="Diminuir quantidade"
-      >
-        -
-      </button>
-      <input
-        className={styles.input}
-        type="number"
-        min={min}
-        max={max}
-        value={quantity}
-        onChange={handleInputChange}
-        aria-label="Quantidade selecionada"
-      />
-      <button
-        type="button"
-        className={styles.buttonRight}
-        onClick={() => updateQuantity(quantity + 1)}
-        aria-label="Aumentar quantidade"
-      >
-        +
-      </button>
+    <div className={styles.wrapper}>
+      <div className={styles.group} aria-label={ariaLabel}>
+        <button
+          type="button"
+          className={styles.buttonLeft}
+          onClick={decrementQuantity}
+          aria-label="Diminuir quantidade"
+        >
+          -
+        </button>
+        <input
+          className={styles.input}
+          type="number"
+          min={min}
+          max={max}
+          value={quantity}
+          onChange={handleInputChange}
+          aria-label="Quantidade selecionada"
+          aria-invalid={Boolean(validationMessage)}
+          aria-describedby={validationMessage ? 'quantity-selector-error' : undefined}
+        />
+        <button
+          type="button"
+          className={styles.buttonRight}
+          onClick={incrementQuantity}
+          aria-label="Aumentar quantidade"
+        >
+          +
+        </button>
+      </div>
+      {validationMessage ? (
+        <p id="quantity-selector-error" className={styles.errorMessage} aria-live="polite">
+          {validationMessage}
+        </p>
+      ) : null}
     </div>
   );
 }
