@@ -75,3 +75,13 @@
 - Foi utilizada IA para auxiliar na melhoria do SEO tecnico da aplicacao.
 - A IA ajudou a estruturar metadata global e por pagina com a Metadata API do Next.js, incluindo `head.tsx`, `robots.ts` e `sitemap.ts`.
 - As alteracoes propostas foram revisadas, ajustadas quando necessario e validadas com diagnosticos, testes automatizados e build de producao.
+
+---
+
+## Branch: `feat/footer`
+
+**Assistencia de IA**
+
+- Foi utilizada IA para auxiliar na implementacao e ajuste visual do footer.
+- A IA ajudou a identificar como aplicar percentual de transparencia na cor utilizada no estilo do componente.
+- As alteracoes sugeridas foram revisadas e adaptadas antes de serem aplicadas ao projeto.

@@ -1,0 +1,22 @@
+.footer {
+  padding: 24px 0;
+  background-color: var(--color-background);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 12px;
+
+  p {
+    color: var(--color-text-secondary);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(from var(--color-text-primary) r g b / 44%);
+  }
+}
