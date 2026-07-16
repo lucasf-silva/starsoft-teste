@@ -65,3 +65,13 @@
 - Foi utilizada IA para orientar sobre as ferramentas e abordagens mais adequadas para implementar logging estruturado e observabilidade.
 - A IA auxiliou na implementacao de logs estruturados para services e requisicoes HTTP.
 - A implementacao de logging e observabilidade foi revisada e validada para garantir que atendesse aos requisitos do projeto.
+
+---
+
+## Branch: `feat/seo_improvements`
+
+**Assistencia de IA**
+
+- Foi utilizada IA para auxiliar na melhoria do SEO tecnico da aplicacao.
+- A IA ajudou a estruturar metadata global e por pagina com a Metadata API do Next.js, incluindo `head.tsx`, `robots.ts` e `sitemap.ts`.
+- As alteracoes propostas foram revisadas, ajustadas quando necessario e validadas com diagnosticos, testes automatizados e build de producao.
