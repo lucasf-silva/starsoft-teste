@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, QuantitySelector } from '@/components';
+import { Container, ProgressiveImage, QuantitySelector } from '@/components';
 import Image from 'next/image';
 import styles from './NftsDetailPage.module.scss';
 import cryptoIcon from '@/assets/cripto-icon.svg';
@@ -19,13 +19,14 @@ export function NftDetailPage({ nft }: NftDetailPageProps) {
     <Container>
       <div className={styles.card}>
         <div className={styles.imageWrapper}>
-          <Image
+          <ProgressiveImage
             className={styles.image}
             src={nft.image}
             alt={nft.name}
             width={240}
             height={240}
             sizes="(min-width: 1536px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 40vw, 100vw"
+            priority
           />
         </div>
 

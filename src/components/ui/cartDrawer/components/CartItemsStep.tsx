@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Trash2 } from 'lucide-react';
 import { QuantitySelector } from '@/components';
+import { ProgressiveImage } from '@/components/ui/progressiveImage';
 import type { CartItem } from '@/types';
 import { formatPrice } from '@/utils';
 import cryptoIcon from '@/assets/cripto-icon.svg';
@@ -29,7 +30,7 @@ export function CartItemsStep({
         {items.map((item) => (
           <li key={item.id} className={styles.item}>
             <div className={styles.itemImageWrapper}>
-              <Image
+              <ProgressiveImage
                 src={item.image}
                 alt={item.name}
                 width={88}

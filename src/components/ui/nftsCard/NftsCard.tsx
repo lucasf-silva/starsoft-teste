@@ -5,6 +5,7 @@ import cryptoIcon from '@/assets/cripto-icon.svg';
 import { formatPrice } from '@/utils';
 import { Nft } from '@/types';
 import Link from 'next/link';
+import { ProgressiveImage } from '@/components/ui/progressiveImage';
 
 type NftsCardProps = {
   nft: Nft;
@@ -29,7 +30,7 @@ export function NftsCard({ nft }: NftsCardProps) {
       transition={{ duration: 0.22, ease: 'easeOut' }}
     >
       <div className={styles.imageWrapper}>
-        <Image
+        <ProgressiveImage
           className={styles.image}
           src={nft.image}
           alt={nft.name}
