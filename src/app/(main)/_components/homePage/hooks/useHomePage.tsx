@@ -1,14 +1,9 @@
 'use client';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { DEFAULT_ORDER_BY, DEFAULT_SORT_BY, ROWS_PER_PAGE } from '@/config';
 import { QueryKey } from '@/types';
-import {
-  DEFAULT_ORDER_BY,
-  DEFAULT_SORT_BY,
-  getNextNftsPageParam,
-  loadNftsList,
-  ROWS_PER_PAGE,
-} from '@/services';
+import { getNextNftsPageParam, loadNftsList } from '@/services';
 import type { SortField, SortOrder } from '@/types';
 import { useMemo, useState } from 'react';
 

@@ -1,12 +1,7 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { DEFAULT_ORDER_BY, DEFAULT_SORT_BY, ROWS_PER_PAGE } from '@/config';
 import { HomePage } from './_components';
-import {
-  DEFAULT_ORDER_BY,
-  DEFAULT_SORT_BY,
-  getNextNftsPageParam,
-  loadNftsList,
-  ROWS_PER_PAGE,
-} from '@/services';
+import { getNextNftsPageParam, loadNftsList } from '@/services';
 import { QueryKey } from '@/types';
 
 export const dynamic = 'force-dynamic';
