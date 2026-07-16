@@ -87,14 +87,18 @@ A aplicacao ficara disponivel em [http://localhost:3000](http://localhost:3000).
 
 ## Variaveis de ambiente
 
-O projeto usa a variavel:
+O projeto usa as variaveis:
 
 - `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_SITE_NAME`
 
-Se ela nao for informada, a aplicacao usa como fallback:
+Se elas nao forem informadas, a aplicacao usa fallbacks para manter a execucao local:
 
 ```text
-https://api-challenge.starsoft.games/api/v1
+NEXT_PUBLIC_API_URL=https://api-challenge.starsoft.games/api/v1
+NEXT_PUBLIC_SITE_URL=https://starsoft-teste-alpha.vercel.app
+NEXT_PUBLIC_SITE_NAME=Starsoft NFTs
 ```
 
 ## Arquitetura resumida
@@ -145,6 +149,16 @@ O projeto possui:
 - `docker-compose.yml`
 
 A configuracao atual esta voltada para **desenvolvimento local**, nao para uma imagem final de producao.
+
+Com Docker em modo dev, o projeto montado em `.:/app` permite que o Next leia o arquivo `.env` diretamente do workspace, enquanto o `.dockerignore` impede que arquivos `.env` sejam copiados para a imagem Docker.
+
+Para rodar o projeto com Docker, basta executar:
+
+```bash
+docker-compose up
+```
+
+Depois disso, a aplicacao fica disponivel em `http://localhost:3000`.
 
 ## Documentacao complementar
 

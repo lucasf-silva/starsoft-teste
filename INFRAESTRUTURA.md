@@ -31,15 +31,19 @@ Os scripts expostos em `package.json` sao:
 
 ## Variaveis de ambiente
 
-### Variavel usada diretamente na aplicacao
+### Variaveis usadas diretamente na aplicacao
 
-O arquivo `src/config/environments.ts` centraliza a URL base da API:
+O arquivo `src/config/environments.ts` centraliza as configuracoes publicas da aplicacao:
 
 - `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_SITE_NAME`
 
-Fallback atual:
+Fallbacks atuais:
 
-- `https://api-challenge.starsoft.games/api/v1`
+- `NEXT_PUBLIC_API_URL=https://api-challenge.starsoft.games/api/v1`
+- `NEXT_PUBLIC_SITE_URL=https://starsoft-teste-alpha.vercel.app`
+- `NEXT_PUBLIC_SITE_NAME=Starsoft NFTs`
 
 ### Variaveis usadas no runtime e containers
 
@@ -81,10 +85,11 @@ Principais pontos:
 - imagem base `node:22-alpine`
 - diretorio de trabalho em `/app`
 - copia inicial de `package*.json`
-- instalacao de dependencias com `npm install`
+- instalacao de dependencias com `npm ci`
 - copia do restante do projeto
 - exposicao da porta `3000`
 - comando final em modo dev com `next dev`
+- sem variaveis da aplicacao definidas diretamente no `Dockerfile`
 
 Resumo do comportamento:
 
@@ -97,6 +102,7 @@ Importante:
 - esse `Dockerfile` **nao esta otimizado para producao**
 - ele nao separa estagios de build e runtime
 - ele nao executa `next build` nem sobe `next start`
+- arquivos `.env` sao ignorados no contexto de build via `.dockerignore`
 
 ## Docker Compose
 
@@ -122,6 +128,8 @@ Beneficios dessa configuracao:
 
 - evita reinstalar dependencias no host a cada execucao dentro do container
 - preserva cache de build entre reinicios
+- permite que o Next leia o `.env` diretamente do workspace montado, sem declarar essas variaveis no `docker-compose.yml`
+- mantem as variaveis do projeto fora do `Dockerfile` e fora da imagem gerada
 - facilita desenvolvimento em maquinas com diferencas de ambiente
 
 ## CI com GitHub Actions
