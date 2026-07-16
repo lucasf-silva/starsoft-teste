@@ -10,7 +10,7 @@ function getCacheKey(src: ImageProps['src']) {
     return src;
   }
 
-  return src.src;
+  return String(src);
 }
 
 type UseProgressiveImageParams = {
