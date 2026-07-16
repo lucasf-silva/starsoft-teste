@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Starsoft Teste
 
-## Getting Started
+Aplicacao web em **Next.js 15** para exibicao de NFTs, com foco em listagem paginada, detalhe de produto e fluxo de compra com carrinho global.
 
-First, run the development server:
+## Visao geral
+
+O projeto hoje combina:
+
+- **SSR com App Router** para a home e para a pagina de detalhe
+- **React Query** para hidratacao e lista infinita na home
+- **Redux Toolkit** para estado global do carrinho
+- **SCSS Modules** para estilizacao isolada por componente
+- **Pino** para observabilidade com logs estruturados
+- **Jest + React Testing Library** para testes automatizados
+
+## Principais funcionalidades
+
+- Listagem de NFTs com ordenacao
+- Carregamento incremental de 8 em 8 itens
+- Pagina de detalhe por `id`
+- Carrinho global com drawer lateral responsivo
+- Fluxo de compra em 3 etapas: `items`, `summary` e `success`
+- Observabilidade em services, requests HTTP e React Query
+
+## Stack
+
+### Aplicacao
+
+- `Next.js 15`
+- `React 19`
+- `TypeScript`
+
+### Dados e estado
+
+- `Axios`
+- `@tanstack/react-query`
+- `@reduxjs/toolkit`
+- `react-redux`
+- `zod`
+
+### UI
+
+- `sass`
+- `framer-motion`
+- `lucide-react`
+
+### Qualidade
+
+- `jest`
+- `@testing-library/react`
+- `eslint`
+- `prettier`
+- `husky`
+- `lint-staged`
+- `commitlint`
+
+## Como rodar
+
+### Requisitos
+
+- `Node.js 22`
+- `npm`
+
+### Instalacao
+
+```bash
+npm install
+```
+
+### Desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicacao ficara disponivel em [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev`: inicia o ambiente de desenvolvimento
+- `npm run build`: gera o build de producao
+- `npm run start`: sobe a aplicacao ja buildada
+- `npm run lint`: executa o ESLint
+- `npm run test`: executa os testes
+- `npm run test:watch`: executa os testes em modo watch
+- `npm run test:coverage`: gera relatorio de cobertura
 
-## Learn More
+## Variaveis de ambiente
 
-To learn more about Next.js, take a look at the following resources:
+O projeto usa a variavel:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_API_URL`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Se ela nao for informada, a aplicacao usa como fallback:
 
-## Deploy on Vercel
+```text
+https://api-challenge.starsoft.games/api/v1
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Arquitetura resumida
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Renderizacao
+
+- A home usa SSR com `dynamic = 'force-dynamic'`
+- A primeira pagina e prefetched no servidor com React Query
+- O cliente continua a navegacao da lista com `useInfiniteQuery`
+- A rota de detalhe resolve o NFT no servidor e usa `notFound()` quando necessario
+
+### Camadas principais
+
+- `src/app`: rotas, layouts e paginas
+- `src/services`: regras de carga, normalizacao e orquestracao server-side
+- `src/actions`: acesso direto a dados externos e resolucoes pontuais
+- `src/store`: estado global do carrinho com Redux Toolkit
+- `src/components/ui`: componentes reutilizaveis, como `Drawer` e `QuantitySelector`
+- `src/types`: contratos compartilhados e tipos auxiliares
+
+### Carrinho
+
+O carrinho e controlado globalmente com Redux e possui tres etapas:
+
+1. `items`
+2. `summary`
+3. `success`
+
+Comportamento atual:
+
+- `Adicionar ao carrinho` abre o drawer na etapa de itens
+- `Comprar` abre o drawer direto no resumo
+- finalizar a compra limpa o carrinho
+- o ultimo botao fecha o drawer
+
+## Testes e qualidade
+
+- A configuracao de testes usa `Jest` com `jsdom`
+- O projeto possui meta minima global de **75%** de cobertura
+- Ha integracao com `Husky`, `lint-staged` e `commitlint`
+- O CI roda os testes em pull requests para `main`
+
+## Docker
+
+O projeto possui:
+
+- `Dockerfile`
+- `docker-compose.yml`
+
+A configuracao atual esta voltada para **desenvolvimento local**, nao para uma imagem final de producao.
+
+## Documentacao complementar
+
+- [ANALISE_PROJETO.md](./ANALISE_PROJETO.md)
+- [INFRAESTRUTURA.md](./INFRAESTRUTURA.md)
+- [AI_USAGE.md](./AI_USAGE.md)
+
+## Observacoes
+
+- A API externa nao possui endpoint dedicado por `id`, por isso o detalhe usa uma estrategia de resolucao com fallback.
+- O estado do carrinho atualmente nao possui persistencia entre sessoes.
