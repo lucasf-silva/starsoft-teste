@@ -1,5 +1,11 @@
 import { createElement } from 'react';
+import type { ReactNode } from 'react';
 import '@testing-library/jest-dom';
+
+type MockComponentProps = {
+  children?: ReactNode;
+  href?: string;
+} & Record<string, unknown>;
 
 jest.mock('next/image', () => ({
   __esModule: true,
@@ -13,7 +19,7 @@ jest.mock('next/image', () => ({
 
 jest.mock('next/link', () => ({
   __esModule: true,
-  default: ({ children, href, ...props }: Record<string, unknown>) =>
+  default: ({ children, href, ...props }: MockComponentProps) =>
     createElement('a', { href, ...props }, children),
 }));
 
@@ -23,7 +29,7 @@ jest.mock('framer-motion', () => {
     {
       get:
         (_, tagName: string) =>
-        ({ children, ...props }: Record<string, unknown>) => {
+        ({ children, ...props }: MockComponentProps) => {
           const cleanProps = { ...props };
 
           delete cleanProps.animate;
