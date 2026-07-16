@@ -22,6 +22,17 @@ O projeto hoje combina:
 - Fluxo de compra em 3 etapas: `items`, `summary` e `success`
 - Observabilidade em services, requests HTTP e React Query
 
+## Proximas features
+
+As proximas evolucoes planejadas para o projeto incluem:
+
+- Login de usuario
+- Criacao de conta
+- Aba de perfil do usuario
+- Historico de compras
+- Rotas protegidas para areas autenticadas
+- Sistema de carteira com saldo e transacoes
+
 ## Stack
 
 ### Aplicacao
