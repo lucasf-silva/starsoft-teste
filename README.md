@@ -170,3 +170,9 @@ Depois disso, a aplicacao fica disponivel em `http://localhost:3000`.
 
 - A API externa nao possui endpoint dedicado por `id`, por isso o detalhe usa uma estrategia de resolucao com fallback.
 - O estado do carrinho atualmente nao possui persistencia entre sessoes.
+
+## LINKS
+
+- [Starsoft NFTs](https://starsoft-teste-alpha.vercel.app)
+- [API Challenge](https://api-challenge.starsoft.games/api/v1)
+- [figma](https://www.figma.com/design/j9HHfWPPoLyObtlVBeMhTD/Front-end-Challenge?node-id=0-1&t=wza4pWleWiykkDHt-1)

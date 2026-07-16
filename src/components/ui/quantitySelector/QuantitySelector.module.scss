@@ -40,6 +40,18 @@
   flex-shrink: 0;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.errorMessage {
+  color: var(--color-primary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 @media (width >= 1024px) {
   .buttonLeft,
   .buttonRight,

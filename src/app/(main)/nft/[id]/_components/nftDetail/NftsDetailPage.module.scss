@@ -235,36 +235,38 @@
   .content {
     gap: 12px;
     padding: 24px;
+    min-width: 0;
   }
 
   .productName {
-    font-size: 42px;
+    font-size: 36px;
   }
 
   .description {
-    font-size: 20px;
+    font-size: 18px;
     -webkit-line-clamp: 5;
   }
 
   .priceRow {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 18px;
   }
 
   .actions {
-    align-items: center;
-    gap: 12px;
-    width: auto;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .buttonAction,
   .buyButton {
     height: 48px;
-    min-width: 220px;
-    font-size: 14px;
-    padding-inline: 20px;
+    min-width: 0;
+    font-size: 13px;
+    padding-inline: 16px;
   }
 }
 
@@ -279,11 +281,32 @@
   }
 
   .productName {
-    font-size: 48px;
+    font-size: 42px;
   }
 
   .description {
-    font-size: 22px;
+    font-size: 20px;
+  }
+
+  .priceRow {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 18px;
+  }
+
+  .actions {
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .buttonAction,
+  .buyButton {
+    min-width: 0;
+    font-size: 14px;
+    padding-inline: 18px;
   }
 }
 
@@ -293,10 +316,47 @@
   }
 
   .content {
-    padding: 32px;
+    gap: 14px;
+    padding: 30px;
+  }
+
+  .productName {
+    font-size: 44px;
   }
 
   .description {
-    font-size: 24px;
+    font-size: 21px;
+  }
+
+  .priceContent {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .price {
+    font-size: 22px;
+    white-space: nowrap;
+  }
+
+  .priceRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .actions {
+    align-items: center;
+    gap: 10px;
+    width: auto;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+  }
+
+  .buttonAction,
+  .buyButton {
+    min-width: 180px;
+    font-size: 13px;
+    padding-inline: 16px;
   }
 }
