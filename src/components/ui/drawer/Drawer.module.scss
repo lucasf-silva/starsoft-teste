@@ -1,0 +1,66 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  border: none;
+  background: rgb(5 10 20 / 62%);
+  z-index: 1190;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  width: min(100vw, 420px);
+  height: 100dvh;
+  padding: 20px 16px 16px;
+  background-color: var(--color-background);
+  border-left: 1px solid var(--color-border);
+  box-shadow: -16px 0 40px rgb(0 0 0 / 22%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--color-border);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.title {
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+@media (width >= 640px) {
+  .drawer {
+    padding: 24px 20px 20px;
+  }
+}

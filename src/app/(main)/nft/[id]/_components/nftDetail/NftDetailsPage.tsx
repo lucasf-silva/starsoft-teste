@@ -1,15 +1,20 @@
+'use client';
+
 import { Container, QuantitySelector } from '@/components';
 import Image from 'next/image';
 import styles from './NftsDetailPage.module.scss';
 import cryptoIcon from '@/assets/cripto-icon.svg';
 import { formatPrice } from '@/utils';
 import { Nft } from '@/types';
+import { useNftDetailPage } from './hooks/useNftDetailPage';
 
 type NftDetailPageProps = {
   nft: Nft;
 };
 
 export function NftDetailPage({ nft }: NftDetailPageProps) {
+  const { quantity, setQuantity, handleAddToCart } = useNftDetailPage({ nft });
+
   return (
     <Container>
       <div className={styles.card}>
@@ -39,8 +44,10 @@ export function NftDetailPage({ nft }: NftDetailPageProps) {
               <p className={styles.price}>{formatPrice(nft.price)} ETH</p>
             </div>
             <div className={styles.actions}>
-              <QuantitySelector />
-              <button className={styles.buttonAction}>Adicionar ao carrinho</button>
+              <QuantitySelector defaultValue={quantity} onChange={setQuantity} />
+              <button className={styles.buttonAction} type="button" onClick={handleAddToCart}>
+                Adicionar ao carrinho
+              </button>
             </div>
           </div>
         </div>

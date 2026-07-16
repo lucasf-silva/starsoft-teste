@@ -44,5 +44,9 @@ jest.mock('framer-motion', () => {
     },
   );
 
-  return { __esModule: true, motion };
+  return {
+    __esModule: true,
+    AnimatePresence: ({ children }: MockComponentProps) => children,
+    motion,
+  };
 });

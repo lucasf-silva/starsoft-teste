@@ -1,4 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { makeStore } from '@/store/store';
 import { NftDetailPage } from './NftDetailsPage';
 
 const nft = {
@@ -12,12 +15,38 @@ const nft = {
 
 describe('NftDetailPage', () => {
   it('renderiza os dados do nft recebido por props', () => {
-    render(<NftDetailPage nft={nft} />);
+    const store = makeStore();
+
+    render(
+      <Provider store={store}>
+        <NftDetailPage nft={nft} />
+      </Provider>,
+    );
 
     expect(screen.getByText('Star Wand')).toBeInTheDocument();
     expect(screen.getByText('Descricao do nft')).toBeInTheDocument();
     expect(screen.getByText('393.00 ETH')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Adicionar ao carrinho' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Quantidade selecionada')).toHaveValue(1);
+  });
+
+  it('adiciona o nft ao carrinho com a quantidade selecionada', async () => {
+    const user = userEvent.setup();
+    const store = makeStore();
+
+    render(
+      <Provider store={store}>
+        <NftDetailPage nft={nft} />
+      </Provider>,
+    );
+
+    fireEvent.change(screen.getByLabelText('Quantidade selecionada'), {
+      target: { value: '3' },
+    });
+    await user.click(screen.getByRole('button', { name: 'Adicionar ao carrinho' }));
+
+    expect(store.getState().cart.items).toEqual([{ ...nft, quantity: 3 }]);
+    expect(store.getState().cart.isOpen).toBe(false);
     expect(screen.getByLabelText('Quantidade selecionada')).toHaveValue(1);
   });
 });
