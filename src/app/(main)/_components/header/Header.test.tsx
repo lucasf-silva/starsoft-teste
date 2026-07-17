@@ -15,6 +15,24 @@ const nft = {
 };
 
 describe('Header', () => {
+  it('abre o drawer de login ao clicar no icone de usuario', async () => {
+    const user = userEvent.setup();
+    const store = makeStore();
+
+    render(
+      <Provider store={store}>
+        <Header />
+      </Provider>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Abrir login' }));
+
+    expect(screen.getByLabelText('Login lateral')).toBeInTheDocument();
+    expect(
+      screen.getByText('Faca login para adicionar itens ao carrinho e finalizar sua compra.'),
+    ).toBeInTheDocument();
+  });
+
   it('abre o drawer do carrinho ao clicar no icone', async () => {
     const user = userEvent.setup();
     const store = makeStore();

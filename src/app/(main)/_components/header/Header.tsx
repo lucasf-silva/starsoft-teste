@@ -1,17 +1,17 @@
 'use client';
 
-import { CartDrawer } from '@/components';
+import { CartDrawer, LoginDrawer } from '@/components';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Handbag } from 'lucide-react';
+import { Handbag, UserRound } from 'lucide-react';
 import Logo from '@/assets/logo.png';
 
 import styles from './Header.module.scss';
 import { useHeader } from './hooks/useHeader';
 
 export function Header() {
-  const { itemsCount, handleToggleCart } = useHeader();
+  const { itemsCount, isAuthenticated, handleToggleCart, handleOpenLoginDrawer } = useHeader();
 
   return (
     <>
@@ -41,6 +41,19 @@ export function Header() {
           <nav className={styles.navHeader}>
             <motion.button
               className={styles.buttonIcon}
+              aria-label={isAuthenticated ? 'Abrir perfil' : 'Abrir login'}
+              type="button"
+              onClick={handleOpenLoginDrawer}
+              whileHover={{ y: -1, scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+            >
+              <span>
+                <UserRound />
+              </span>
+            </motion.button>
+            <motion.button
+              className={styles.buttonIcon}
               aria-label="Abrir Carrinho"
               type="button"
               onClick={handleToggleCart}
@@ -57,6 +70,7 @@ export function Header() {
         </div>
       </header>
       <CartDrawer />
+      <LoginDrawer />
     </>
   );
 }

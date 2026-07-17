@@ -1,15 +1,18 @@
 'use client';
 
 import { configureStore } from '@reduxjs/toolkit';
+import { authSlice, type AuthState } from './authSlice';
 import { cartSlice, type CartState } from './cartSlice';
 
 type StorePreloadedState = {
-  cart: CartState;
+  auth?: AuthState;
+  cart?: CartState;
 };
 
 export function makeStore(preloadedState?: StorePreloadedState) {
   return configureStore({
     reducer: {
+      auth: authSlice.reducer,
       cart: cartSlice.reducer,
     },
     preloadedState,
