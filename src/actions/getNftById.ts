@@ -1,7 +1,7 @@
 import { InfiniteData } from '@tanstack/react-query';
 import { DEFAULT_ORDER_BY, DEFAULT_SORT_BY } from '@/config';
 import type { Nft, NftList } from '@/types';
-import { createLogger } from '@/utils/logger';
+import { createLogger } from '@/utils';
 import { getNftsList } from './nftsAll';
 
 type CachedNftsList = NftList | NftList[] | InfiniteData<NftList, number>;

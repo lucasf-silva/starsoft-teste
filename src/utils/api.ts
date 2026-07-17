@@ -1,5 +1,5 @@
 import { API_URL } from '@/config';
-import { createLogger, serializeError } from '@/utils/logger';
+import { createLogger, serializeError } from './logger';
 
 import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 

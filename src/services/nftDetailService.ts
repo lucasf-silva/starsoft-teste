@@ -2,7 +2,7 @@ import 'server-only';
 
 import { getNftById } from '@/actions';
 import { Nft } from '@/types';
-import { createLogger } from '@/utils/logger';
+import { createLogger } from '@/utils';
 import { loadNftsList } from './allNftsService';
 
 const logger = createLogger();

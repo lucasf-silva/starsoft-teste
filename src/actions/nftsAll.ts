@@ -3,7 +3,7 @@
 import { Nft, NftsListResponse, PatchAPI } from '@/types';
 import type { LoadNftsListParams } from '@/types';
 import { api } from '@/utils';
-import { createLogger, serializeError } from '@/utils/logger';
+import { createLogger, serializeError } from '@/utils';
 
 type getNftsListResponse = {
   products: Nft[];
