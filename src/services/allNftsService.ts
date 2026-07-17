@@ -2,7 +2,7 @@ import { getNftsList } from '@/actions';
 import { DEFAULT_ORDER_BY, DEFAULT_SORT_BY, ROWS_PER_PAGE } from '@/config';
 import { nftsListResponse } from '@/types';
 import type { LoadNftsListParams, NftList } from '@/types';
-import { createLogger, serializeError } from '@/utils/logger';
+import { createLogger, serializeError } from '@/utils';
 
 const logger = createLogger();
 

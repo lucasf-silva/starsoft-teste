@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import { Trash2 } from 'lucide-react';
-import { QuantitySelector } from '@/components';
-import { ProgressiveImage } from '@/components/ui/progressiveImage';
+import { QuantitySelector, ProgressiveImage } from '@/components';
 import type { CartItem } from '@/types';
 import { formatPrice } from '@/utils';
 import cryptoIcon from '@/assets/cripto-icon.svg';

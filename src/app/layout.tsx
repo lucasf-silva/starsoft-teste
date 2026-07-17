@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-import { QueryProvider } from '@/components/providers/QueryProvider';
-import { StoreProvider } from '@/components/providers/StoreProvider';
 import './globals.scss';
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from '@/config';
+import { QueryProvider, StoreProvider } from '@/components';
 
 const poppins = Poppins({
   subsets: ['latin'],

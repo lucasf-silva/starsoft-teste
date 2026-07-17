@@ -5,7 +5,7 @@ import cryptoIcon from '@/assets/cripto-icon.svg';
 import { formatPrice } from '@/utils';
 import { Nft } from '@/types';
 import Link from 'next/link';
-import { ProgressiveImage } from '@/components/ui/progressiveImage';
+import { ProgressiveImage } from '@/components';
 
 type NftsCardProps = {
   nft: Nft;

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { loadNftDetailById } from '@/services/nftDetailService';
+import { loadNftDetailById } from '@/services';
 import { createNotFoundMetadata, createPageMetadata } from '@/utils';
 import { notFound } from 'next/navigation';
 import { NftDetailPage } from './_components';

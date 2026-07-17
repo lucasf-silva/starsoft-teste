@@ -5,6 +5,14 @@ jest.mock('@/utils', () => ({
   api: {
     get: jest.fn(),
   },
+  createLogger: () => ({
+    debug: jest.fn(),
+    info: jest.fn(),
+    error: jest.fn(),
+  }),
+  serializeError: jest.fn((error: unknown) => ({
+    message: error instanceof Error ? error.message : String(error),
+  })),
 }));
 
 const mockedApiGet = jest.mocked(api.get);

@@ -1,7 +1,7 @@
 'use client';
 
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createLogger, serializeError } from '@/utils/logger';
+import { createLogger, serializeError } from '@/utils';
 import { ReactNode, useState } from 'react';
 
 type QueryProviderProps = {
