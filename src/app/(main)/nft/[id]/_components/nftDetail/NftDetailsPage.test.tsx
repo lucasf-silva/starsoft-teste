@@ -33,7 +33,14 @@ describe('NftDetailPage', () => {
 
   it('adiciona o nft ao carrinho e abre o drawer no step inicial', async () => {
     const user = userEvent.setup();
-    const store = makeStore();
+    const store = makeStore({
+      auth: {
+        isLoginDrawerOpen: false,
+        user: {
+          email: 'user@example.com',
+        },
+      },
+    });
 
     render(
       <Provider store={store}>
@@ -54,7 +61,14 @@ describe('NftDetailPage', () => {
 
   it('abre o resumo quando o usuario escolhe comprar', async () => {
     const user = userEvent.setup();
-    const store = makeStore();
+    const store = makeStore({
+      auth: {
+        isLoginDrawerOpen: false,
+        user: {
+          email: 'user@example.com',
+        },
+      },
+    });
 
     render(
       <Provider store={store}>
@@ -68,5 +82,22 @@ describe('NftDetailPage', () => {
     expect(store.getState().cart.isOpen).toBe(true);
     expect(store.getState().cart.currentStep).toBe('summary');
     expect(screen.getByLabelText('Quantidade selecionada')).toHaveValue(1);
+  });
+
+  it('abre o drawer de login e nao adiciona item quando o usuario nao esta autenticado', async () => {
+    const user = userEvent.setup();
+    const store = makeStore();
+
+    render(
+      <Provider store={store}>
+        <NftDetailPage nft={nft} />
+      </Provider>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Adicionar ao carrinho' }));
+
+    expect(store.getState().auth.isLoginDrawerOpen).toBe(true);
+    expect(store.getState().cart.items).toHaveLength(0);
+    expect(store.getState().cart.isOpen).toBe(false);
   });
 });

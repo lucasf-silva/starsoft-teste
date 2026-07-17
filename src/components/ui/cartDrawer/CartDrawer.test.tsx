@@ -60,7 +60,14 @@ describe('CartDrawer', () => {
 
   it('renderiza o resumo quando o drawer abre nesse step e finaliza a compra com sucesso', async () => {
     const user = userEvent.setup();
-    const store = makeStore();
+    const store = makeStore({
+      auth: {
+        isLoginDrawerOpen: false,
+        user: {
+          email: 'user@example.com',
+        },
+      },
+    });
 
     store.dispatch(addItem({ nft, quantity: 2 }));
     store.dispatch(setCartStep('summary'));
@@ -86,5 +93,26 @@ describe('CartDrawer', () => {
 
     expect(store.getState().cart.isOpen).toBe(false);
     expect(store.getState().cart.currentStep).toBe('items');
+  });
+
+  it('abre o login ao tentar finalizar compra sem autenticacao', async () => {
+    const user = userEvent.setup();
+    const store = makeStore();
+
+    store.dispatch(addItem({ nft, quantity: 1 }));
+    store.dispatch(setCartStep('summary'));
+    store.dispatch(openCart());
+
+    render(
+      <Provider store={store}>
+        <CartDrawer />
+      </Provider>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Finalizar Compra' }));
+
+    expect(store.getState().auth.isLoginDrawerOpen).toBe(true);
+    expect(store.getState().cart.items).toHaveLength(1);
+    expect(store.getState().cart.currentStep).toBe('summary');
   });
 });

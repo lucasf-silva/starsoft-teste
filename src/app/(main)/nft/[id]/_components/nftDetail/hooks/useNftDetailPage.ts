@@ -1,6 +1,14 @@
 'use client';
 
-import { addItem, openCart, setCartStep, useAppDispatch } from '@/store';
+import {
+  addItem,
+  openCart,
+  openLoginDrawer,
+  selectIsAuthenticated,
+  setCartStep,
+  useAppDispatch,
+  useAppSelector,
+} from '@/store';
 import type { Nft } from '@/types';
 import { useState } from 'react';
 
@@ -17,6 +25,7 @@ type UseNftDetailPageReturn = {
 
 export const useNftDetailPage = ({ nft }: UseNftDetailPageParams): UseNftDetailPageReturn => {
   const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [quantity, setQuantity] = useState(1);
 
   const addItemToCart = () => {
@@ -29,6 +38,11 @@ export const useNftDetailPage = ({ nft }: UseNftDetailPageParams): UseNftDetailP
   };
 
   const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      dispatch(openLoginDrawer());
+      return;
+    }
+
     addItemToCart();
     dispatch(setCartStep('items'));
     dispatch(openCart());
@@ -36,6 +50,11 @@ export const useNftDetailPage = ({ nft }: UseNftDetailPageParams): UseNftDetailP
   };
 
   const handleBuyNow = () => {
+    if (!isAuthenticated) {
+      dispatch(openLoginDrawer());
+      return;
+    }
+
     addItemToCart();
     dispatch(setCartStep('summary'));
     dispatch(openCart());

@@ -4,10 +4,12 @@ import { useMemo } from 'react';
 import {
   clearCart,
   closeCart,
+  openLoginDrawer,
   removeItem,
   selectCartItems,
   selectCartStep,
   selectCartTotalPrice,
+  selectIsAuthenticated,
   selectIsCartOpen,
   setCartStep,
   updateQuantity,
@@ -36,6 +38,7 @@ export const useCartDrawer = (): UseCartDrawerReturn => {
   const items = useAppSelector(selectCartItems);
   const totalPrice = useAppSelector(selectCartTotalPrice);
   const currentStep = useAppSelector(selectCartStep);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const title = useMemo(() => {
     if (currentStep === 'summary') {
@@ -60,10 +63,20 @@ export const useCartDrawer = (): UseCartDrawerReturn => {
   };
 
   const handleNextStep = () => {
+    if (!isAuthenticated) {
+      dispatch(openLoginDrawer());
+      return;
+    }
+
     dispatch(setCartStep('summary'));
   };
 
   const handleFinishPurchase = () => {
+    if (!isAuthenticated) {
+      dispatch(openLoginDrawer());
+      return;
+    }
+
     dispatch(clearCart());
     dispatch(setCartStep('success'));
   };
